@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor</title>
+    <!-- <link rel="stylesheet" href="main.css"> -->
+
+</head>
+
+<style>
+    body {
+        margin: 0%;
+        padding: 0%;
+    }
+    
+    .list {
+        display: flex;
+        list-style-type: none;
+    }
+    
+    .links {
+        /* border: 2px solid red; */
+        margin: 2px 68px;
+        padding: 35px 2px;
+        font-size: 1.5rem;
+        color: red;
+    }
+    
+    .cursor {
+        width: 2rem;
+        height: 2rem;
+        border: 2px solid black;
+        border-radius: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        transition: all 0.5s ease;
+        transition-property: transform;
+        transform-origin: 100% 100%;
+        z-index: 1;
+        backdrop-filter: invert(1) !important;
+    }
+    /* .hovered-links {
+        color: white;
+    } */
+    
+    .btn {
+        padding: 2px 2px;
+        display: block;
+        margin: 32px auto;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        font-size: 2.5rem;
+        /* position: relative;
+        z-index: -3; */
+    }
+    
+    .link-grow {
+        transform: scale(2);
+        /* background-color: transparent; */
+    }
+    
+    img {
+        position: relative;
+    }
+</style>
+
+<body>
+    <div class="cursor">
+
+    </div>
+
+    <button id="select" class="btn">
+        select btn
+    </button>
+
+    <div class="container">
+        <ul class="list">
+            <li class="links">
+                Name
+            </li>
+            <li class="links">
+                About Us
+            </li>
+            <li class="links">
+                contact Us
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <img src="./index.jpg" alt="">
+    </div>
+
+    <script>
+        console.log('this is console');
+        let mouseCursor = document.querySelector('.cursor');
+        let links = document.querySelectorAll('.links');
+
+        let selectBtn = document.getElementById('select');
+
+        console.log(links)
+
+
+        selectBtn.addEventListener('click', (e) => [
+            console.log('you cliked on the select btn')
+        ])
+
+        window.addEventListener('mousemove', cursor);
+
+        function cursor(e) {
+            // console.log(e);
+            mouseCursor.style.top = e.pageY + 'px';
+            mouseCursor.style.left = e.pageX + 'px';
+        }
+
+        links.forEach((e) => {
+            e.addEventListener('mouseover', () => {
+                mouseCursor.classList.add('link-grow')
+                e.classList.add('hovered-links')
+            });
+
+            e.addEventListener('mouseleave', () => {
+                mouseCursor.classList.remove('link-grow')
+                e.classList.remove('hovered-links')
+            });
+            e.addEventListener('click', () => {
+                console.log('you clicked on the nav-links')
+            })
+        })
+    </script>
+</body>
+
+</html>
